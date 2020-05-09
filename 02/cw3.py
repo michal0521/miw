@@ -8,12 +8,18 @@ TEMPERATURE_TYPES = {
     KELVIN,
 }
 
-ABSOLUTE_ZERO_TEMPERATURE = 273.15
+ABSOLUTE_ZERO = 273.15
 
-def convertCelsiusToType(temperature, toType):
+def convertCelsiusToType(temperature, toType=FAHRENHEIT):
+    if not isinstance(temperature, int):
+        raise Exception(f'Temperature has to be a digit')
+    
+    if not isinstance(toType, str):
+        raise Exception(f'Conversion type has to be a string')
+    
     # check if conversion to given type is available
     if not toType in TEMPERATURE_TYPES:
-        raise Exception(f'Conversion from celsius to {toType} is not available.')
+        raise Exception(f'Conversion from celsius to {toType} is not available')
     
     if toType == FAHRENHEIT:
         return convertCelsiusToFahrenheit(temperature)
@@ -30,15 +36,19 @@ def convertCelsiusToFahrenheit(temperature):
 
 
 def convertCelsiusToRankine(temperature):
-    return (temperature + ABSOLUTE_ZERO_TEMPERATURE) * 9 / 5
+    return (temperature + ABSOLUTE_ZERO) * 9 / 5
 
 
 def convertCelsiusToKelvin(temperature):
-    return temperature + ABSOLUTE_ZERO_TEMPERATURE
+    return temperature + ABSOLUTE_ZERO
 
-celsius = 32
-toType = KELVIN
-converted = convertCelsiusToType(celsius, toType)
+celsius = 17
+toType = FAHRENHEIT
+try:
+    converted = convertCelsiusToType(celsius, toType)
 
-print(f'{celsius} degrees celsius is {converted} degrees {toType}')      
+    print(f'{celsius} degrees celsius is {converted} degrees {toType}')      
+except Exception as error:
+    print(f'Couldn\'t convert the temperature: {error}.')
+
          
