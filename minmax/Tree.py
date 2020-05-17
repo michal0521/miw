@@ -11,7 +11,7 @@ class Tree:
             
             return
         
-        root = Node(0, 0)
+        root = Node(None, 0, 0)
         root.createChildren()
         
         self.root = root
@@ -26,9 +26,11 @@ class Tree:
     def getGraph(self):
         graph = gvgen.GvGen()
         
-        if root == None:
+        if self.root == None:
             print('No root node, could not get graph')
             
             return
         
-        root.getGraph(graph)
+        self.root.addToGraph(graph)
+        
+        return graph
