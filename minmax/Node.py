@@ -7,6 +7,7 @@ class Node:
         self.middleChild = None
         self.rightChild = None
         self.graphItem = None
+        self.result = None
         
     def __str__(self):
         return str(self.value)
@@ -31,6 +32,20 @@ class Node:
         self.rightChild.addToGraph(graph, self.graphItem)
         
         return
+    
+    def getEndResult(self):
+        return self.result
+    
+    def setEndResult(self):
+        if self.isTie():
+            self.result = 0
+            
+            return
+        
+        if self.isLose():
+            self.result = -1
+            
+            return
         
     def display(self):
         print(f'Hello, my value is {self.value}, im {self.depth} levels deep')
@@ -68,10 +83,10 @@ class Node:
     
     def getEndNodeLabel(self):
         if self.isTie():
-            return 'TIE'
+            return f'TIE: {self.getEndResult()}'
         
         if self.isLose():
-            return 'LOSE'
+            return f'LOSE: {self.getEndResult()}'
         
         # if is end node but is not tie nor lose then wtf
         return 'what am i'
@@ -90,7 +105,9 @@ class Node:
     def createChildren(self):
         # if node has value of 21 or more do not create children (game rules). It is a end node then
         if self.value >= 21:
-            print('Can not create children')
+            print('Can not create children, getting end result')
+            
+            self.setEndResult()
             
             return
         
