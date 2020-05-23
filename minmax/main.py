@@ -4,7 +4,7 @@ tree = Tree()
 
 tree.initializeTree()
 
-tree.displayTree()
+tree.getMoves()
 
 graph = tree.getGraph()
 

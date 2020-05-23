@@ -23,6 +23,14 @@ class Tree:
         
         return
     
+    def getMoves(self):
+        if self.root == None:
+            raise Exception('Initialize the tree first.')
+        
+        result = self.root.getMoves()
+        
+        print(f'Best result: {result}')
+    
     def getGraph(self):
         graph = gvgen.GvGen()
         
